@@ -43,6 +43,7 @@ cexio.db
 history
 TMP_*
 .idea
+.vscode
 volumes
 config.js
 config-*.js

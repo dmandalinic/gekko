@@ -4,8 +4,8 @@ var EMA = require('./EMA.js');
 var Indicator = function(config) {
   this.input = 'price'	
   this.result = false;
-  this.short = new EMA(config.short);
-  this.long = new EMA(config.long);
+  this.short = new EMA({weight: config.short});
+  this.long = new EMA({weight: config.long});
 }
 
 // add a price and calculate the EMAs and

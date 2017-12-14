@@ -1,4 +1,4 @@
-﻿// @link http://en.wikipedia.org/wiki/Exponential_moving_average#Exponential_moving_average
+﻿let IndicatorInterface = require('./IndicatorInterface.js');
 
 var Indicator = function(weight) {
   this.input = 'price';
@@ -7,30 +7,26 @@ var Indicator = function(weight) {
   this.age = 0;
 }
 
-Indicator.prototype.update = function(price) {
-  // The first time we can't calculate based on previous
-  // ema, because we haven't calculated any yet.
-  if(this.result === false)
-    this.result = price;
+  requiredParams() { return ['weight']; }
 
-  this.age++;
-  this.calculate(price);
+  get result() { return this._result; }
+  set result(res) {
+    this.age++;
+    this._result = res;
+  }
 
-  return this.result;
-}
+  update(price) {
+    return (
+      this.result = (this.result === false) ? price : this.calculate(price)
+    );
+  }
 
-//    calculation (based on tick/day):
-//  EMA = Price(t) * k + EMA(y) * (1 – k)
-//  t = today, y = yesterday, N = number of days in EMA, k = 2 / (N+1)
-Indicator.prototype.calculate = function(price) {
-  // weight factor
-  var k = 2 / (this.weight + 1);
+  calculate(price) {
+    const weight_factor = 2 / (this.weight + 1);
+    const yesterday = this.result;
+    return (price * weight_factor + yesterday * (1 - weight_factor));
+  }
 
-  // yesterday
-  var y = this.result;
-  
-  // calculation
-  this.result = price * k + y * (1 - k);
 }
 
 module.exports = Indicator;
