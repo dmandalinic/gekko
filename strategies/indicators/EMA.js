@@ -1,15 +1,19 @@
 ﻿let IndicatorInterface = require('./IndicatorInterface.js');
 
-var Indicator = function(weight) {
-  this.input = 'price';
-  this.weight = weight;
-  this.result = false;
-  this.age = 0;
-}
+class Indicator {
+
+  constructor(config) {
+      this.input = 'price';
+      this.weight = config['weight'];
+      this.result = false;
+      this.age = 0;
+
+  }
 
   requiredParams() { return ['weight']; }
 
   get result() { return this._result; }
+
   set result(res) {
     this.age++;
     this._result = res;

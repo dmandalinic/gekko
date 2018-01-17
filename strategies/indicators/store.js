@@ -10,7 +10,9 @@ class Store extends IndicatorInterface {
     this.result = value;
   }
 
-  requiredParams() { return ['length'];}
+  requiredParams() { 
+    return ['length'];
+  }
 }
 
 module.exports = Store;

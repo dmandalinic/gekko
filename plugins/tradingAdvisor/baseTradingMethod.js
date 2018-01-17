@@ -30,6 +30,7 @@ _.each(indicatorFiles, function(indicator) {
       Indicators[indicatorName] = require(indicatorsPath + indicator);
     } catch (e) {
       log.error("Failed to load indicator", indicatorName);
+      log.error(e);
     }
 });
 

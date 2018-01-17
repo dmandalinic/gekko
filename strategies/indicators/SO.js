@@ -28,7 +28,9 @@ class SO extends IndicatorInterface {
     return this.result;
   }
 
-  requiredParams() { return ['period']; }
+  requiredParams() { 
+    return ['period']; 
+  }
 }
 
 module.exports = SO;

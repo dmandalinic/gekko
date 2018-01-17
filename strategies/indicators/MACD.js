@@ -4,9 +4,9 @@ var EMA = require('./EMA.js');
 var Indicator = function(config) {
   this.input = 'price';
   this.diff = false;
-  this.short = new EMA(config.short);
-  this.long = new EMA(config.long);
-  this.signal = new EMA(config.signal);
+  this.short = new EMA({weight: config.short});
+  this.long = new EMA({weight: config.long});
+  this.signal = new EMA({weight: config.signal});
 }
 
 Indicator.prototype.update = function(price) {
